@@ -20,9 +20,11 @@ import logging
 from pathlib import Path
 from datetime import datetime
 
-from openhands.sdk import LLM, Agent, Conversation, Tool
+from openhands.sdk import (
+    LLM, Agent, Conversation, Tool,
+    agent_definition_to_factory, register_agent
+)
 from openhands.sdk.subagent import AgentDefinition
-from openhands.sdk.agent import agent_definition_to_factory, register_agent
 from openhands.tools.terminal import TerminalTool
 from openhands.tools.file_editor import FileEditorTool
 from openhands.tools.task_tracker import TaskTrackerTool

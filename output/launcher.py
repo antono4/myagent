@@ -11,15 +11,23 @@ import sys
 import os
 from pathlib import Path
 
-# Add output directory to path
-sys.path.insert(0, str(Path(__file__).parent))
+# Add current directory to path
+script_dir = Path(__file__).parent
+sys.path.insert(0, str(script_dir))
 
 try:
     from social_media_dev_agent import SocialMediaDevAgent
-except ImportError:
-    print("Error: social_media_dev_agent.py not found!")
-    print("Make sure you're running from the correct directory.")
-    print("Expected location: /workspace/project/output/")
+except ImportError as e:
+    print(f"Error: {e}")
+    print("\n" + "="*50)
+    print("❌ Missing Dependencies!")
+    print("="*50)
+    print("\nPlease install the required packages first:")
+    print(f"  cd {script_dir}")
+    print("  pip install -r requirements.txt")
+    print("\nOr set your API key and install openhands:")
+    print("  pip install openhands-sdk pydantic")
+    print("\n" + "="*50)
     sys.exit(1)
 
 

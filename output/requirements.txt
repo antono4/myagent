@@ -1,12 +1,12 @@
 # Social Media Development Agent Dependencies
 
-# OpenHands SDK
-openhands-sdk>=0.1.0
+# OpenHands SDK (must match versions)
+openhands-sdk==1.39.1
+openhands-tools==1.39.0
 
 # Core dependencies
 pydantic>=2.0.0
 
 # Development tools
 python-dotenv>=1.0.0
-```
 
