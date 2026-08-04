@@ -1,5 +1,7 @@
 # 🤖 Social Media Development Agent
 
+**🚀 Live Demo**: https://antono4.github.io/myagent
+
 Agent AI otonom yang dapat mengembangkan aplikasi mobile media sosial lengkap menggunakan Flutter dan Firebase.
 
 ## 🎯 Overview
@@ -10,6 +12,17 @@ Agent ini dapat secara mandiri:
 - ✅ Mengimplementasi semua fitur media sosial
 - ✅ Mengkonfigurasi backend Firebase
 - ✅ Menjalankan tes dan validasi
+
+## 🌐 Live Web Interface
+
+Kunjungi **https://antono4.github.io/myagent** untuk menggunakan agent melalui browser!
+
+Fitur web interface:
+- ✨ Beautiful UI
+- 🎯 Template selection
+- 📝 Custom requirements
+- ⚡ Real-time progress
+- 📥 Download generated app
 
 ## 📱 Fitur yang Diimplementasi
 
