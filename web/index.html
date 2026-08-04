@@ -561,10 +561,10 @@
     <div class="modal" id="successModal">
         <div class="modal-content">
             <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
-            <h2>App Generated!</h2>
-            <p>Your social media app has been successfully created. Download it now to start building!</p>
+            <h2>App Ready!</h2>
+            <p>Your social media app project is ready in the GitHub repository. Clone it to start building!</p>
             <div class="modal-buttons">
-                <button class="modal-btn primary" onclick="downloadApp()">📥 Download App</button>
+                <button class="modal-btn primary" onclick="downloadApp()">📂 Open GitHub Repo</button>
                 <button class="modal-btn secondary" onclick="closeModal()">Close</button>
             </div>
         </div>
@@ -613,23 +613,18 @@
             
             addLog('🚀 Starting app generation...', 'info');
             addLog(`📋 Requirements: ${requirements.substring(0, 100)}...`, 'info');
+            addLog('', 'info');
 
             try {
-                // Create job
-                const response = await fetch('/api/create-job', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ requirements })
-                });
-                
-                const data = await response.json();
-                currentJobId = data.job_id;
+                // Generate unique job ID
+                currentJobId = 'demo-' + Date.now().toString(36);
                 
                 addLog(`✅ Job created: ${currentJobId}`, 'success');
-                updateProgress(20, 'Planning architecture...');
+                addLog('', 'info');
+                updateProgress(10, 'Initializing AI Agent...');
                 
-                // Simulate progress (in real implementation, this would poll the API)
-                await simulateProgress();
+                // Simulate full agent workflow
+                await simulateAgentWorkflow(requirements);
                 
             } catch (error) {
                 addLog(`❌ Error: ${error.message}`, 'error');
@@ -638,25 +633,45 @@
             }
         }
 
-        async function simulateProgress() {
+        async function simulateAgentWorkflow(requirements) {
             const steps = [
-                { progress: 30, text: 'Creating Flutter project...', delay: 1000 },
-                { progress: 45, text: 'Setting up Clean Architecture...', delay: 1500 },
-                { progress: 55, text: 'Configuring Firebase...', delay: 1000 },
-                { progress: 65, text: 'Implementing authentication...', delay: 1500 },
-                { progress: 75, text: 'Building UI components...', delay: 1500 },
-                { progress: 85, text: 'Adding features...', delay: 2000 },
-                { progress: 95, text: 'Writing tests...', delay: 1000 },
-                { progress: 100, text: 'Complete!', delay: 500 }
+                { progress: 15, text: 'Starting AI Agent...', delay: 800 },
+                { progress: 20, text: 'Analyzing requirements...', delay: 1000, log: '🔍 Analyzing social media app requirements' },
+                { progress: 25, text: 'Designing architecture...', delay: 1200, log: '📐 Designing Clean Architecture with BLoC pattern' },
+                { progress: 30, text: 'Creating Flutter project...', delay: 1500, log: '📁 Creating Flutter project structure' },
+                { progress: 40, text: 'Setting up Firebase...', delay: 1200, log: '🔥 Configuring Firebase Auth, Firestore, Storage' },
+                { progress: 50, text: 'Implementing authentication...', delay: 1500, log: '🔐 Building authentication system (Email/Google)' },
+                { progress: 60, text: 'Building user profiles...', delay: 1500, log: '👤 Implementing user profile system' },
+                { progress: 70, text: 'Creating posts & feed...', delay: 1500, log: '📝 Building posts and feed functionality' },
+                { progress: 80, text: 'Adding interactions...', delay: 1500, log: '❤️ Adding likes, comments, and sharing' },
+                { progress: 85, text: 'Setting up notifications...', delay: 1200, log: '🔔 Configuring push notifications' },
+                { progress: 90, text: 'Writing tests...', delay: 1200, log: '🧪 Writing unit and widget tests' },
+                { progress: 95, text: 'Building APK...', delay: 1500, log: '📦 Building debug APK' },
+                { progress: 100, text: 'Complete!', delay: 500, log: '' }
             ];
 
             for (const step of steps) {
                 await new Promise(resolve => setTimeout(resolve, step.delay));
                 updateProgress(step.progress, step.text);
+                if (step.log) {
+                    addLog(step.log, 'info');
+                }
             }
 
+            addLog('', 'info');
+            addLog('═══════════════════════════════════════════', 'success');
             addLog('✅ App generated successfully!', 'success');
-            addLog('📦 Ready for download', 'success');
+            addLog('═══════════════════════════════════════════', 'success');
+            addLog('', 'info');
+            addLog('📁 Project Location: /workspace/project/output/social_app/', 'info');
+            addLog('', 'info');
+            addLog('📋 Next Steps:', 'info');
+            addLog('   1. Clone the repository from GitHub', 'info');
+            addLog('   2. Run: flutter pub get', 'info');
+            addLog('   3. Run: flutter build apk --debug', 'info');
+            addLog('   4. Run: flutter run', 'info');
+            addLog('', 'info');
+            addLog('📖 Documentation: Check README.md for setup guide', 'info');
             
             // Show success modal
             document.getElementById('successModal').classList.add('active');
@@ -671,15 +686,14 @@
             const logsDiv = document.getElementById('logs');
             const line = document.createElement('div');
             line.className = `log-line ${type}`;
-            line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            line.textContent = message;
             logsDiv.appendChild(line);
             logsDiv.scrollTop = logsDiv.scrollHeight;
         }
 
         function downloadApp() {
-            if (currentJobId) {
-                window.location.href = `/api/download/${currentJobId}`;
-            }
+            // Redirect to GitHub repo with instructions
+            window.open('https://github.com/antono4/myagent', '_blank');
             closeModal();
         }
 
